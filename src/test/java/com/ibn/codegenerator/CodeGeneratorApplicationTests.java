@@ -1,6 +1,7 @@
 package com.ibn.codegenerator;
 
 import com.ibn.codegenerator.entity.ConnectionDO;
+import com.ibn.codegenerator.entity.GeneratorDO;
 import com.ibn.codegenerator.exception.IbnException;
 import com.ibn.codegenerator.service.ConnectionService;
 import org.assertj.core.util.Lists;
@@ -38,6 +39,8 @@ class CodeGeneratorApplicationTests {
     private ConnectionService connectionService;
     @Autowired
     private ConnectionDO connectionDO;
+    @Autowired
+    private GeneratorDO generatorDO;
     /**
      * @description: 获取application中的所有beanname
      * @author：RenBin
@@ -114,17 +117,13 @@ class CodeGeneratorApplicationTests {
             System.out.println(String.format("%s->%s",property.getName(),value));
         }
     }
-//    public void writer(Map<String, Object> objectMap, String templatePath, String outputFile) throws Exception {
-//        if (StringUtils.isBlank(templatePath)) {
-//            return;
-//        }
-//        VelocityEngine velocityEngine;
-//        Template template = velocityEngine.getTemplate(templatePath, ConstVal.UTF8);
-//        try (FileOutputStream fos = new FileOutputStream(outputFile);
-//             OutputStreamWriter ow = new OutputStreamWriter(fos, ConstVal.UTF8);
-//             BufferedWriter writer = new BufferedWriter(ow)) {
-//            template.merge(new VelocityContext(objectMap), writer);
-//        }
-//        logger.debug("模板:" + templatePath + ";  文件:" + outputFile);
-//    }
+    /**
+     * @description: 将yml中的属性映射到DO中
+     * @author：RenBin
+     * @createTime：2020/4/24 16:21
+     */
+    @Test
+    void readPropertiesFormYml() {
+        System.out.println(generatorDO.getCommonConfigDO().getAuthor());
+    }
 }

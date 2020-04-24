@@ -3,4 +3,9 @@ databaseinfo:
   connectionURL: jdbc:mysql://192.167.12.238:3306/springbootplus?useUnicode=true&characterEncoding=UTF-8&useSSL=false
   userId: root
   password: 123456
+ibn:
+  generator:
+    commonConfigDO:
+      author: RenBin
+
 

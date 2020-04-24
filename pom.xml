@@ -53,7 +53,7 @@
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity-engine-core</artifactId>
             <version>2.2</version>
-            <scope>test</scope>
+            <scope>compile</scope>
         </dependency>
         <!--        springboot测试-->
         <dependency>
