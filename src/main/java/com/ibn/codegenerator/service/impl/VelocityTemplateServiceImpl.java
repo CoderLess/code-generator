@@ -7,6 +7,7 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.io.BufferedWriter;
@@ -23,6 +24,7 @@ import java.util.Map;
  * @author： RenBin
  * @createTime：2020/4/24 15:15
  */
+@Service("templateService")
 public class VelocityTemplateServiceImpl implements TemplateService {
     @Autowired
     private VelocityEngine velocityEngine;

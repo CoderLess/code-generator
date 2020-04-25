@@ -1,8 +1,14 @@
 package com.ibn.codegenerator.config;
 
+import com.ibn.codegenerator.constant.CharacterVal;
+import com.ibn.codegenerator.constant.VelocityVal;
+import org.apache.velocity.app.Velocity;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.io.IOException;
+import java.util.Properties;
 
 /**
  * @version 1.0
@@ -21,6 +27,12 @@ public class VelocityConfig {
      */
     @Bean
     public VelocityEngine velocityEngine() {
-        return new VelocityEngine();
+        Properties properties = new Properties();
+        properties.setProperty(VelocityVal.VM_LOAD_PATH_KEY, VelocityVal.VM_LOAD_PATH_VALUE);
+        properties.setProperty(Velocity.FILE_RESOURCE_LOADER_PATH, "");
+        properties.setProperty(Velocity.ENCODING_DEFAULT, CharacterVal.UTF8);
+        properties.setProperty(Velocity.INPUT_ENCODING, CharacterVal.UTF8);
+        properties.setProperty("file.resource.loader.unicode", "true");
+        return new VelocityEngine(properties);
     }
 }

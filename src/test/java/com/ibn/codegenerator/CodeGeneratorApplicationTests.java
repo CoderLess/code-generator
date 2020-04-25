@@ -1,9 +1,11 @@
 package com.ibn.codegenerator;
 
+import com.ibn.codegenerator.config.VelocityConfig;
 import com.ibn.codegenerator.entity.ConnectionDO;
-import com.ibn.codegenerator.entity.GeneratorDO;
+import com.ibn.codegenerator.entity.UserConfigDO;
 import com.ibn.codegenerator.exception.IbnException;
 import com.ibn.codegenerator.service.ConnectionService;
+import com.ibn.codegenerator.service.GeneratorService;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.mybatis.generator.api.IntrospectedTable;
@@ -40,7 +42,9 @@ class CodeGeneratorApplicationTests {
     @Autowired
     private ConnectionDO connectionDO;
     @Autowired
-    private GeneratorDO generatorDO;
+    private UserConfigDO userConfigDO;
+    @Autowired
+    private List<GeneratorService> listGeneratorService;
     /**
      * @description: 获取application中的所有beanname
      * @author：RenBin
@@ -51,6 +55,10 @@ class CodeGeneratorApplicationTests {
         String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
         for (String beanDefinitionName : beanDefinitionNames) {
             System.out.println(beanDefinitionName);
+            if (beanDefinitionName.equals("velocityConfig")) {
+                VelocityConfig velocityConfig = (VelocityConfig) applicationContext.getBean(beanDefinitionName);
+                System.out.println(velocityConfig.velocityEngine().getProperty("resource-loader-path"));
+            }
         }
     }
     /**
@@ -124,6 +132,16 @@ class CodeGeneratorApplicationTests {
      */
     @Test
     void readPropertiesFormYml() {
-        System.out.println(generatorDO.getCommonConfigDO().getAuthor());
+        System.out.println(userConfigDO.getConfigMap().get("author"));
+    }
+    /**
+     * @description: 生成代码
+     * @author：RenBin
+     * @createTime：2020/4/25 20:12
+     */
+    @Test
+    void createCode() throws IbnException {
+        for (GeneratorService generatorService : listGeneratorService) {
+        }
     }
 }
