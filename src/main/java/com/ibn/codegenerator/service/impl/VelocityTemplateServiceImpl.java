@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.util.Map;
 
 /**
@@ -33,6 +30,11 @@ public class VelocityTemplateServiceImpl implements TemplateService {
     public void writer(Map<String, Object> objectMap, String templatePath, String outputFile) throws IbnException {
         if (StringUtils.isEmpty(templatePath)) {
             return;
+        }
+        File file = new File(outputFile);
+        File path = new File(file.getParent());
+        if (!path.exists()) {
+            path.mkdirs();
         }
         Template template = velocityEngine.getTemplate(templatePath, CharacterVal.UTF8);
         try (FileOutputStream fos = new FileOutputStream(outputFile);

@@ -15,21 +15,10 @@ import java.util.Map;
 @Generator
 public interface GeneratorService {
     /**
-     * @description: 设置模板的位置
+     * @description: 生成代码
      * @author：RenBin
-     * @createTime：2020/4/25 22:08
+     * @createTime：2020/7/21 15:57
      */
-    String templatePath();
-    /**
-     * @description: 设置输出路径
-     * @author：RenBin
-     * @createTime：2020/4/25 22:09
-     */
-    String outPath();
-    /**
-     * @description: 在用户自定义信息中添加数据
-     * @author：RenBin
-     * @createTime：2020/4/25 22:06
-     */
-    Map<String, Object> addProperties();
+    void generate();
 }
+

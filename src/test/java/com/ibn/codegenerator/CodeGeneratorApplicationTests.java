@@ -44,7 +44,7 @@ class CodeGeneratorApplicationTests {
     @Autowired
     private UserConfigDO userConfigDO;
     @Autowired
-    private List<GeneratorService> listGeneratorService;
+    private GeneratorService generatorService;
     /**
      * @description: 获取application中的所有beanname
      * @author：RenBin
@@ -78,17 +78,6 @@ class CodeGeneratorApplicationTests {
         myBatisGenerator.generate(null);
     }
 
-    @Test
-    void codeConfiguration() throws Exception {
-        List<String> warnings = new ArrayList<>();
-        Configuration config = new Configuration();
-
-        //   ... fill out the config object as appropriate...
-
-        DefaultShellCallback callback = new DefaultShellCallback(true);
-        MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
-        myBatisGenerator.generate(null);
-    }
     /**
      * @description: 获取表的信息
      * @author：RenBin
@@ -105,10 +94,9 @@ class CodeGeneratorApplicationTests {
                 context, connectionService.createConnection().getMetaData(), javaTypeResolver, warnings);
         TableConfiguration tableConfiguration = new TableConfiguration(context);
         tableConfiguration.setSchema("springbootplus");
-        tableConfiguration.setTableName("foo_bar");
+        tableConfiguration.setTableName("user_base");
         List<IntrospectedTable> tables = databaseIntrospector
                 .introspectTables(tableConfiguration);
-        System.out.println(tables.size());
     }
     /**
      * @description: 从对象中获取属性名及属性值
@@ -141,7 +129,6 @@ class CodeGeneratorApplicationTests {
      */
     @Test
     void createCode() throws IbnException {
-        for (GeneratorService generatorService : listGeneratorService) {
-        }
+        generatorService.generate();
     }
 }

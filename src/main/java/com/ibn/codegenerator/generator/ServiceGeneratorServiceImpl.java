@@ -1,15 +1,16 @@
 package com.ibn.codegenerator.generator;
 
+import com.ibn.codegenerator.entity.SysConfigDO;
+import com.ibn.codegenerator.entity.UserConfigDO;
+import com.ibn.codegenerator.entity.VelocityConfigDO;
 import com.ibn.codegenerator.exception.IbnException;
 import com.ibn.codegenerator.service.GeneratorService;
 import com.ibn.codegenerator.service.TemplateService;
-import com.ibn.codegenerator.service.impl.VelocityTemplateServiceImpl;
-import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @version 1.0
@@ -21,20 +22,32 @@ import java.util.Map;
  */
 @Service("serviceGenerator")
 public class ServiceGeneratorServiceImpl implements GeneratorService {
+    @Autowired
+    private UserConfigDO userConfigDO;
+    @Autowired
+    private SysConfigDO sysConfigDO;
+    @Autowired
+    private VelocityConfigDO velocityConfigDO;
+    @Autowired
+    private TemplateService templateService;
 
 
     @Override
-    public String templatePath() {
-        return "/templates/service.java.vm";
-    }
+    public void generate() {
 
-    @Override
-    public String outPath() {
-        return "test.java";
-    }
+        // 获取所有需要生成的模板
+        Set<Map.Entry<String, String>> templateEntry = velocityConfigDO.getTemplate().entrySet();
+        templateEntry.stream().forEach(entry -> {
+            String subPackageName = entry.getKey();
+            String templatePath = String.format("%s/%s",velocityConfigDO.getBasepath(),entry.getValue());
+            String outputPath = String.format("%s/%s.java", sysConfigDO.getBasepackage().replace(".", "/"),
+                    subPackageName);
+            try {
+                templateService.writer(userConfigDO.getConfigMap(),templatePath,outputPath);
+            } catch (IbnException e) {
+                e.printStackTrace();
+            }
+        });
 
-    @Override
-    public Map<String, Object> addProperties() {
-        return null;
     }
 }
