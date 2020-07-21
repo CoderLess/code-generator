@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,4 +28,10 @@ public class SysConfigDO {
      * @createTime：2020/7/21 15:47
      */
     private String basepackage;
+    /**
+     * @description: 哪些表需要生成代码
+     * @author：RenBin
+     * @createTime：2020/7/21 17:17
+     */
+    private List<String> generatetable;
 }

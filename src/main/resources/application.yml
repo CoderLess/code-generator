@@ -7,6 +7,9 @@ databaseinfo:
   password: 123456
 sysconfig:
   basepackage: com.mysteel.oilchem.crm
+  # 根据哪些表生成代码
+  generatetable:
+    - user_base
 velocityconfig:
   # velocity模板路径
   basepath: /templates
