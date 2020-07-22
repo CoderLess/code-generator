@@ -1,0 +1,96 @@
+package com.mysteel.oilchem.crm.controller.impl;
+
+import com.github.pagehelper.PageInfo;
+import com.mysteel.config.common.page.Query;
+import com.mysteel.oilchem.crm.ao.${table.entityName}AbstractAO;
+import com.mysteel.oilchem.crm.controller.${table.entityName}AbstractController;
+import com.mysteel.oilchem.crm.vo.${table.entityName}VO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+/**
+ * @version 1.0
+ * @description: ${table.remark}
+ * @projectName：v1sp46
+ * @see: com.mysteel.oilchem.crm.controller.impl
+ * @author： ${author}
+ * @createTime：${curTime}
+ */
+@RestController
+public class ${table.entityName}Controller extends ${table.entityName}AbstractController
+{
+    @Autowired
+    private ${table.entityName}AbstractAO ${table.entityNameLow}AO;
+
+    /**
+     * @description: 创建${table.entityName}
+     * @author：${author}
+     * @createTime：${curTime}
+     */
+    @Override
+    protected void create${table.entityName}(${table.entityName}VO ${table.entityNameLow}VO) {
+        ${table.entityNameLow}AO.create${table.entityName}(${table.entityNameLow}VO);
+    }
+
+    /**
+     * @description: 批量创建${table.entityName}
+     * @author：${author}
+     * @createTime：${curTime}
+     */
+    @Override
+    protected void createBatch${table.entityName}(List<${table.entityName}VO> ${table.entityNameLow}VOList) {
+        ${table.entityNameLow}AO.createBatch${table.entityName}(${table.entityNameLow}VOList);
+    }
+
+    /**
+     * @description: 根据ID删除${table.entityName}
+     * @author：RenBin
+     * @createTime：2020/7/22 16:33
+     */
+    @Override
+    protected void remove${table.entityName}(Long id) {
+        ${table.entityNameLow}AO.remove${table.entityName}(id);
+    }
+
+    /**
+     * @description: 根据ID批量删除${table.entityName}
+     * @author：${author}
+     * @createTime：${curTime}
+     */
+    @Override
+    protected void removeBatch${table.entityName}(List<Long> idList) {
+        ${table.entityNameLow}AO.removeBatch${table.entityName}(idList);
+    }
+
+    /**
+     * @description: 修改${table.entityName}
+     * @author：${author}
+     * @createTime：${curTime}
+     */
+    @Override
+    protected void modify${table.entityName}(${table.entityName}VO ${table.entityNameLow}VO) {
+        ${table.entityNameLow}AO.modify${table.entityName}(${table.entityNameLow}VO);
+    }
+
+    /**
+     * @description: 查询${table.entityName}
+     * @author：${author}
+     * @createTime：${curTime}
+     */
+    @Override
+    protected List<${table.entityName}VO> query${table.entityName}(${table.entityName}VO ${table.entityNameLow}VO) {
+        return ${table.entityNameLow}AO.query${table.entityName}(${table.entityNameLow}VO);
+    }
+
+    /**
+     * @description: 分页查询${table.entityName}
+     * @author：${author}
+     * @createTime：${curTime}
+     */
+    @Override
+    protected PageInfo<${table.entityName}VO> query${table.entityName}ByPage(${table.entityName}VO ${table.entityNameLow}VO, Query query) {
+        return ${table.entityNameLow}AO.query${table.entityName}ByPage(${table.entityNameLow}VO, query);
+    }
+}

@@ -1,0 +1,20 @@
+package com.mysteel.oilchem.crm.dao;
+
+import java.util.List;
+
+/**
+ * @version 1.0
+ * @description: ${table.remark}
+ * @projectName：v1sp46
+ * @see: com.mysteel.oilchem.crm.dao
+ * @author： ${author}
+ * @createTime：${curTime}
+ */
+public interface ${table.entityName}Dao extends BaseDao<${table.entityName}DO> {
+    /**
+     * @description: 根据条件查询
+     * @author：${author}
+     * @createTime：${curTime}
+     */
+    List<${table.entityName}DO> query${table.entityName}List(${table.entityName}DO ${table.entityNameLow}DO);
+}

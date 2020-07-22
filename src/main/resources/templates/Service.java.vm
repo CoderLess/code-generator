@@ -1,0 +1,33 @@
+package com.mysteel.oilchem.crm.service;
+
+import com.mysteel.config.common.page.Pagination;
+import com.mysteel.config.common.page.Query;
+import ${dtoName};
+
+import java.util.List;
+/**
+ * @version 1.0
+ * @description: ${table.remark}
+ * @projectName：v1sp46
+ * @see: com.mysteel.oilchem.crm.service
+ * @author： ${author}
+ * @createTime：${curTime}
+ */
+public interface ${table.entityName}Service
+{
+    long create${table.entityName}(${table.entityName}DTO ${table.entityNameLow}DTO);
+
+    long createBatch${table.entityName}(List<${table.entityName}DTO> ${table.entityNameLow}DTOList);
+
+    int modify${table.entityName}(${table.entityName}DTO ${table.entityNameLow}DTO);
+
+    int remove${table.entityName}(Long id);
+
+    int deleteBatch${table.entityName}(Long[] idArr);
+
+    ${table.entityName}DTO query${table.entityName}(Long id);
+
+    Pagination<${table.entityName}DTO> queryPage${table.entityName}(${table.entityName}DTO ${table.entityNameLow}DTO, Query query);
+
+    List<${table.entityName}DTO> query${table.entityName}List(${table.entityName}DTO ${table.entityNameLow}DTO);
+}

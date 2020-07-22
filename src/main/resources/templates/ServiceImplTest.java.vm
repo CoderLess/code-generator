@@ -1,0 +1,121 @@
+package templates;
+
+import com.google.common.collect.Lists;
+import com.mysteel.oilchem.crm.domain.${table.entityName}DTO;
+import com.mysteel.oilchem.crm.service.${table.entityName}Service;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import com.mysteel.config.common.page.Query;
+
+import java.math.BigDecimal;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = {Application.class})
+public class ${table.entityName}ServiceImplTest {
+
+    @Autowired
+    private ${table.entityName}Service ${table.entityNameLow}Service;
+
+    @Test
+    public void create${table.entityName}() {
+        ${table.entityName}DTO ${table.entityNameLow}DTO = new ${table.entityName}DTO();
+        #foreach($fileld in ${table.fieldDOList})
+            #if($fileld.fieldName != "id")
+                #if($fileld.attributeType == "String")
+        ${table.entityNameLow}DTO.set$fileld.attributeName ("$fileld.attributeName");
+                #elseif($fileld.attributeType == "Long")
+        ${table.entityNameLow}DTO.set$fileld.attributeName (0L);
+                #elseif($fileld.attributeType == "Integer")
+        ${table.entityNameLow}DTO.set$fileld.attributeName (1);
+                #end
+            #end
+        #end
+        ${table.entityNameLow}Service.create${table.entityName}(${table.entityNameLow}DTO);
+    }
+
+    @Test
+    public void createBatch${table.entityName}() {
+        ${table.entityName}DTO ${table.entityNameLow}DTO;
+        List<${table.entityName}DTO> ${table.entityNameLow}DTOList = Lists.newArrayList();
+        for (int i = 0; i < 10; i++) {
+            ${table.entityNameLow}DTO= new ${table.entityName}DTO();
+            #foreach($fileld in ${table.fieldDOList})
+                #if($fileld.fieldName != "id")
+                    #if($fileld.attributeType == "String")
+            ${table.entityNameLow}DTO.set$fileld.attributeName ("$fileld.attributeName");
+                    #elseif($fileld.attributeType == "Long")
+            ${table.entityNameLow}DTO.set$fileld.attributeName (0L);
+                    #elseif($fileld.attributeType == "Integer")
+            ${table.entityNameLow}DTO.set$fileld.attributeName (1);
+                    #elseif($fileld.attributeType == "BigDecimal")
+            ${table.entityNameLow}DTO.set$fileld.attributeName (new BigDecimal("1.00"));
+                    #end
+                #end
+            #end
+            ${table.entityNameLow}DTOList.add(${table.entityNameLow}DTO);
+        }
+
+        ${table.entityNameLow}Service.createBatch${table.entityName}(${table.entityNameLow}DTOList);
+    }
+
+    @Test
+    public void modify${table.entityName}() {
+        ${table.entityName}DTO ${table.entityNameLow}DTO = new ${table.entityName}DTO();
+        #foreach($fileld in ${table.fieldDOList})
+            #if($fileld.fieldName != "id")
+                #if($fileld.attributeType == "String")
+        ${table.entityNameLow}DTO.set$fileld.attributeName ("modify");
+                #elseif($fileld.attributeType == "Long")
+        ${table.entityNameLow}DTO.set$fileld.attributeName (2L);
+                #elseif($fileld.attributeType == "Integer")
+        ${table.entityNameLow}DTO.set$fileld.attributeName (3);
+                #elseif($fileld.attributeType == "BigDecimal")
+        ${table.entityNameLow}DTO.set$fileld.attributeName (new BigDecimal("3.00"));
+                #end
+            #end
+        #end
+
+        ${table.entityNameLow}DTO.setId (10L);
+        ${table.entityNameLow}Service.modify${table.entityName} (${table.entityNameLow}DTO);
+    }
+
+    @Test
+    public void remove${table.entityName}() {
+        ${table.entityNameLow}Service.remove${table.entityName} (1L);
+    }
+
+    @Test
+    public void deleteBatch${table.entityName}() {
+        List<Long> idList = Lists.newArrayList();
+        for (Long i = 2L; i < 6L; i++) {
+            idList.add(i);
+        }
+        ${table.entityNameLow}Service.deleteBatch${table.entityName} ((Long[]) idList.toArray());
+    }
+
+    @Test
+    public void query${table.entityName}() {
+        ${table.entityName}DTO ${table.entityNameLow}DTO = ${table.entityNameLow}Service.query${table.entityName}(6L);
+        System.out.println(JSONObject.toJSONString(${table.entityNameLow}DTO));
+    }
+
+    @Test
+    public void queryPage${table.entityName}() {
+        ${table.entityName}DTO ${table.entityNameLow}DTO = new ${table.entityName}DTO();
+        Query query = new Query();
+        query.setPageNum(1);
+        query.setPageSize(5);
+        Pagination<${table.entityName}DTO> ${table.entityNameLow}DTOPagination = ${table.entityNameLow}Service.queryPage${table.entityName} (${table.entityNameLow}DTO, query);
+        System.out.println(JSONObject.toJSONString(${table.entityNameLow}DTOPagination));
+    }
+
+    @Test
+    public void query${table.entityName}List() {
+        ${table.entityName}DTO ${table.entityNameLow}DTO = new ${table.entityName}DTO();
+        List<${table.entityName}DTO> ${table.entityNameLow}DTOList = ${table.entityNameLow}Service.query${table.entityName}List(${table.entityNameLow}DTO);
+        System.out.println(JSONObject.toJSONString(${table.entityNameLow}DTOList));
+    }
+}

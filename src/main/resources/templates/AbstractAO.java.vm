@@ -1,0 +1,94 @@
+package com.mysteel.oilchem.crm.ao;
+
+import com.github.pagehelper.PageInfo;
+import com.mysteel.config.common.page.Query;
+import com.mysteel.oilchem.crm.vo.ContractLineVO;
+
+import java.util.List;
+
+/**
+ * @version 1.0
+ * @description: ${table.remark}
+ * @projectName：v1sp46
+ * @see: com.mysteel.oilchem.crm.ao
+ * @author： ${author}
+ * @createTime：${curTime}
+ */
+public abstract class ${table.entityName}AbstractAO {
+    /**
+     * @description: 创建${table.entityName}
+     * @author：${author}
+     * @createTime：${curTime}
+     */
+    public void create${table.entityName}(${table.entityName}VO ${table.entityNameLow}VO) {
+        this.create(${table.entityNameLow}VO);
+    }
+
+    /**
+     * @description: 批量创建${table.entityName}
+     * @author：${author}
+     * @createTime：${curTime}
+     */
+    public void createBatch${table.entityName}(List<${table.entityName}VO> ${table.entityNameLow}VOList) {
+        this.createBatch(${table.entityNameLow}VOList);
+    }
+
+    /**
+     * @description: 根据ID删除${table.entityName}
+     * @author：RenBin
+     * @createTime：2020/7/22 16:33
+     */
+    public void remove${table.entityName}(Long id) {
+        this.remove(id);
+    }
+
+    /**
+     * @description: 根据ID批量删除${table.entityName}
+     * @author：${author}
+     * @createTime：${curTime}
+     */
+    public void removeBatch${table.entityName}(List<Long> idList) {
+        this.removeBatch(idList);
+    }
+
+    /**
+     * @description: 修改${table.entityName}
+     * @author：${author}
+     * @createTime：${curTime}
+     */
+    public void modify${table.entityName}(${table.entityName}VO ${table.entityNameLow}VO) {
+        this.modify${table.entityName}(${table.entityNameLow}VO);
+    }
+
+    /**
+     * @description: 查询${table.entityName}
+     * @author：${author}
+     * @createTime：${curTime}
+     */
+    public List<${table.entityName}VO> query${table.entityName}(${table.entityName}VO ${table.entityNameLow}VO) {
+        return this.query(${table.entityNameLow}VO);
+    }
+
+    /**
+     * @description: 分页查询${table.entityName}
+     * @author：${author}
+     * @createTime：${curTime}
+     */
+    public PageInfo<${table.entityName}VO> query${table.entityName}ByPage(${table.entityName}VO ${table.entityNameLow}VO, Query query) {
+        return this.queryByPage(${table.entityNameLow}VO, query);
+    }
+
+    protected abstract void create(${table.entityName}VO ${table.entityNameLow}VO);
+
+    protected abstract void createBatch(List<${table.entityName}VO> ${table.entityNameLow}VOList);
+
+    protected abstract void remove(Long id);
+
+    protected abstract void removeBatch(List<Long> id);
+
+    protected abstract void modify(${table.entityName}VO ${table.entityNameLow}VO);
+
+    protected abstract List<${table.entityName}VO> query(${table.entityName}VO ${table.entityNameLow}VO);
+
+    protected abstract PageInfo<${table.entityName}VO> queryByPage(${table.entityName}VO ${table.entityNameLow}VO, Query query);
+}

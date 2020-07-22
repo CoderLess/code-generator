@@ -1,7 +1,9 @@
 package com.ibn.codegenerator.service;
 
 import com.ibn.codegenerator.anno.Generator;
+import com.ibn.codegenerator.exception.IbnException;
 
+import java.sql.SQLException;
 import java.util.Map;
 
 /**
@@ -19,6 +21,6 @@ public interface GeneratorService {
      * @author：RenBin
      * @createTime：2020/7/21 15:57
      */
-    void generate();
+    void generate() throws SQLException, IbnException;
 }
 

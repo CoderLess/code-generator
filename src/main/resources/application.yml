@@ -2,27 +2,39 @@ spring:
 # 数据库连接配置
 databaseinfo:
   driverClass: com.mysql.cj.jdbc.Driver
-  connectionURL: jdbc:mysql://192.167.12.238:3306/springbootplus?useUnicode=true&characterEncoding=UTF-8&useSSL=false
-  userId: root
-  password: 123456
+  connectionURL: jdbc:mysql://192.168.202.100:3306/lz_finance?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+  userId: oilchem
+  password: mysteel
 sysconfig:
   basepackage: com.mysteel.oilchem.crm
   # 根据哪些表生成代码
   generatetable:
-    - user_base
+    - lz_finance.contract_line
+
 velocityconfig:
   # velocity模板路径
   basepath: /templates
   # 哪些模板需要生成
-  template: {
-    service: service.java.vm
-  }
-
+  template:
+    service: Service.java.vm
+    serviceImpl: ServiceImpl.java.vm
+    mapper: Dao.xml.vm
+    dao: Dao.java.vm
+    do: DO.java.vm
+    dto: DTO.java.vm
+    vo: VO.java.vm
+    abstractController: AbstractController.java.vm
+    controller: Controller.java.vm
+    abstractAO: AbstractAO.java.vm
+    ao: AO.java.vm
+    test: ServiceImplTest.java.vm
 userconfig:
   # 用户自定义配置
-  configMap: {
+  configMap:
     author: RenBin
-  }
-
+    curTime: 2020年7月22日 13:58
+    daoName: com.mysteel.oilchem.crm.dao.#{entityName}Dao
+    doName: com.mysteel.oilchem.crm.entity.#{entityName}DO
+    dtoName: com.mysteel.oilchem.crm.domain.#{entityName}DTO
 
 

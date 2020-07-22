@@ -93,10 +93,15 @@ class CodeGeneratorApplicationTests {
         DatabaseIntrospector databaseIntrospector = new DatabaseIntrospector(
                 context, connectionService.createConnection().getMetaData(), javaTypeResolver, warnings);
         TableConfiguration tableConfiguration = new TableConfiguration(context);
-        tableConfiguration.setSchema("springbootplus");
-        tableConfiguration.setTableName("user_base");
+//        tableConfiguration.setSchema("springbootplus");
+//        tableConfiguration.setTableName("user_base");
         List<IntrospectedTable> tables = databaseIntrospector
                 .introspectTables(tableConfiguration);
+        for (IntrospectedTable table : tables) {
+//            table.getAllColumns()
+            System.out.println(table.getFullyQualifiedTable());
+        }
+        System.out.println(tables);
     }
     /**
      * @description: 从对象中获取属性名及属性值
@@ -128,7 +133,7 @@ class CodeGeneratorApplicationTests {
      * @createTime：2020/4/25 20:12
      */
     @Test
-    void createCode() throws IbnException {
+    void createCode() throws IbnException, SQLException {
         generatorService.generate();
     }
 }

@@ -34,4 +34,10 @@ public class SysConfigDO {
      * @createTime：2020/7/21 17:17
      */
     private List<String> generatetable;
+    /**
+     * @description: 表的相关信息
+     * @author：RenBin
+     * @createTime：2020/7/22 8:14
+     */
+    private List<TableDO> tableDOList;
 }

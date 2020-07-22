@@ -1,0 +1,28 @@
+package com.mysteel.oilchem.crm.vo;
+
+import com.mysteel.config.common.domain.BaseVO;
+import lombok.Data;
+
+/**
+ * @version 1.0
+ * @description: ${table.remark}
+ * @projectName：v1sp46
+ * @see: com.mysteel.oilchem.crm.entity
+ * @author： ${author}
+ * @createTime：${curTime}
+ */
+@Data
+public class ${table.entityName}VO extends BaseVO {
+
+	private static final long serialVersionUID = 1L;
+
+    #foreach($fileld in ${table.fieldDOList})
+    /**
+     * @description: $fileld.remark
+     * @author：${author}
+     * @createTime：${curTime}
+     */
+    @ApiModelProperty(value="$fileld.remark")
+    private $fileld.attributeType $fileld.parameterName;
+    #end
+}
