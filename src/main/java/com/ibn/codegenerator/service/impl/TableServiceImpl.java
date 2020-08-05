@@ -6,10 +6,8 @@ import com.ibn.codegenerator.entity.SysConfigDO;
 import com.ibn.codegenerator.entity.TableDO;
 import com.ibn.codegenerator.exception.IbnException;
 import com.ibn.codegenerator.service.ConnectionService;
-import com.ibn.codegenerator.service.InitTableService;
-import com.ibn.codegenerator.service.TablePrepareService;
+import com.ibn.codegenerator.service.TableService;
 import com.ibn.codegenerator.util.StringUtil;
-import org.mybatis.generator.api.FullyQualifiedTable;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.JavaTypeResolver;
@@ -20,23 +18,30 @@ import org.mybatis.generator.internal.db.DatabaseIntrospector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.MutablePropertySources;
+import org.springframework.core.env.PropertiesPropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * @version 1.0
- * @description:
+ * @description: 表信息分析
  * @projectName：code-generator
  * @see: com.ibn.codegenerator.service
  * @author： RenBin
  * @createTime：2020/7/22 8:00
  */
 @Service("tableService")
-public class TableServiceImpl implements TablePrepareService, InitTableService {
+public class TableServiceImpl implements TableService {
     private static final Logger logger = LoggerFactory.getLogger(TableServiceImpl.class);
+    @Autowired
+    private Environment environment;
     @Autowired
     private SysConfigDO sysConfigDO;
     @Autowired
@@ -102,7 +107,6 @@ public class TableServiceImpl implements TablePrepareService, InitTableService {
                 } else {
                     fieldDO.setAttributeType("String");
                 }
-//                System.out.println(String.format("%s---->%s",actualColumnName,introspectedColumn.getActualTypeName()));
                 fieldDO.setParameterName(StringUtil.lowCaseFirstLatter(upcamelCaseName));
                 fieldDO.setAttributeName(StringUtil.upperCaseFirstLatter(upcamelCaseName));
                 fieldDO.setRemark(introspectedColumn.getRemarks());
@@ -117,6 +121,11 @@ public class TableServiceImpl implements TablePrepareService, InitTableService {
     }
 
     @Override
-    public void initTable() {
+    public void initTable(TableDO tableDO) {
+        ConfigurableEnvironment c = (ConfigurableEnvironment) environment;
+        MutablePropertySources m = c.getPropertySources();
+        Properties p = new Properties();
+        p.put("table.entityName", tableDO.getEntityName());
+        m.addFirst(new PropertiesPropertySource("defaultProperties", p));
     }
 }

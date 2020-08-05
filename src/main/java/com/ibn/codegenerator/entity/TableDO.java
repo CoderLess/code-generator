@@ -1,7 +1,6 @@
 package com.ibn.codegenerator.entity;
 
 import lombok.Data;
-import org.mybatis.generator.api.IntrospectedTable;
 
 import java.util.List;
 

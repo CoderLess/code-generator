@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * @version 1.0
- * @description:
+ * @description: 获取表信息
  * @projectName：code-generator
  * @see: com.ibn.codegenerator.service.impl
  * @author： RenBin

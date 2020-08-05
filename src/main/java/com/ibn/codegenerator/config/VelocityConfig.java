@@ -7,12 +7,11 @@ import org.apache.velocity.app.VelocityEngine;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.io.IOException;
 import java.util.Properties;
 
 /**
  * @version 1.0
- * @description:
+ * @description: Velocity的相关配置
  * @projectName：code-generator
  * @see: com.ibn.codegenerator.config
  * @author： RenBin

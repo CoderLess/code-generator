@@ -33,7 +33,7 @@
         <where>
             <trim suffixOverrides=",">
             #foreach($fileld in ${table.fieldDOList})
-                <if test="$fileld.parameterName != null"> and `$fileld.fieldName` = #{$fileld.parameterName},</if>
+                <if test="$fileld.parameterName != null"> and `$fileld.fieldName` = #{$fileld.parameterName}</if>
             #end
             </trim>
         </where>

@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * @version 1.0
- * @description:
+ * @description: 数据库字段配置
  * @projectName：code-generator
  * @see: com.ibn.codegenerator.entity
  * @author： RenBin

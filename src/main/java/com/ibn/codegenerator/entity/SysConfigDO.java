@@ -2,12 +2,11 @@ package com.ibn.codegenerator.entity;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @version 1.0
@@ -21,7 +20,7 @@ import java.util.Map;
 @Accessors(chain = true)
 @Component
 @ConfigurationProperties(prefix = "sysconfig")
-public class SysConfigDO {
+public class SysConfigDO implements Serializable {
     /**
      * @description: 基础包
      * @author：RenBin

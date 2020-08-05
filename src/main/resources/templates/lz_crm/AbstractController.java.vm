@@ -106,7 +106,7 @@ public abstract class ${table.entityName}AbstractController extends BaseControll
         }
 	}
 	@ApiOperation(value = "查询${table.entityName}", notes = "查询${table.entityName}")
-	@GetMapping("query")
+	@GetMapping("queryByPage")
 	public ResultInfo<Object> query${table.entityName}ByPage(${table.entityName}VO ${table.entityNameLow}VO,Query query,
                                                         HttpServletRequest request){
         try{

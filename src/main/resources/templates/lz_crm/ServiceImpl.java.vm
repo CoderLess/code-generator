@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
  * @author： ${author}
  * @createTime：${curTime}
  */
-@Service("${table.entityNameLow}Service}")
+@Service("${table.entityNameLow}Service")
 public class ${table.entityName}ServiceImpl implements ${table.entityName}Service {
 
     @Autowired

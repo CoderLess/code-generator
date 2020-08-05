@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @version 1.0
- * @description:
+ * @description: 数据库连接的相关配置
  * @projectName：code-generator
  * @see: com.ibn.codegenerator.config
  * @author： RenBin

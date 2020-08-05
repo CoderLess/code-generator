@@ -57,7 +57,7 @@ public abstract class ${table.entityName}AbstractAO {
      * @createTime：${curTime}
      */
     public void modify${table.entityName}(${table.entityName}VO ${table.entityNameLow}VO) {
-        this.modify${table.entityName}(${table.entityNameLow}VO);
+        this.modify(${table.entityNameLow}VO);
     }
 
     /**

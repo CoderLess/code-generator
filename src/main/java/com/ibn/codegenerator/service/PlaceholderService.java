@@ -12,6 +12,11 @@ import java.util.Map;
  * @author： RenBin
  * @createTime：2020/7/22 9:53
  */
-public interface PlaceholderDealService {
-    Map<String,Object> dealPlaceholder(TableDO tableDO);
+public interface PlaceholderService {
+    /**
+     * @description: 从环境变量中获取数据填充占位符
+     * @author：RenBin
+     * @createTime：2020/8/5 8:18
+     */
+    void fillPlaceholderFromEnvironment(Object object) throws NoSuchMethodException;
 }

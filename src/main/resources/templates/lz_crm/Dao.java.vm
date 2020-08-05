@@ -1,5 +1,8 @@
 package com.mysteel.oilchem.crm.dao;
 
+import com.mysteel.config.common.dao.BaseDao;
+import com.mysteel.oilchem.crm.entity.${table.entityName}DO;
+
 import java.util.List;
 
 /**

@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -17,7 +18,7 @@ import java.util.Map;
 @Data
 @Component
 @ConfigurationProperties(prefix = "velocityconfig")
-public class VelocityConfigDO {
+public class VelocityConfigDO implements Serializable {
     /**
      * @description: velocity模板路径
      * @author：RenBin
@@ -29,5 +30,5 @@ public class VelocityConfigDO {
      * @author：RenBin
      * @createTime：2020/7/21 16:43
      */
-    private Map<String,String> template;
+    private Map<String,VelocityTemplateDO> template;
 }

@@ -1,5 +1,6 @@
 package templates;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.mysteel.oilchem.crm.domain.${table.entityName}DTO;
 import com.mysteel.oilchem.crm.service.${table.entityName}Service;
@@ -93,7 +94,8 @@ public class ${table.entityName}ServiceImplTest {
         for (Long i = 2L; i < 6L; i++) {
             idList.add(i);
         }
-        ${table.entityNameLow}Service.deleteBatch${table.entityName} ((Long[]) idList.toArray());
+        Long[] idArray = idList.toArray(new Long[idList.size()]);
+        ${table.entityNameLow}Service.deleteBatch${table.entityName} (idArray);
     }
 
     @Test

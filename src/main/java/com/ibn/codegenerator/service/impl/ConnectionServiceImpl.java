@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 /**
  * @version 1.0
- * @description:
+ * @description: 数据库连接
  * @projectName：code-generator
  * @see: com.ibn.codegenerator.service.impl
  * @author： RenBin

@@ -1,10 +1,8 @@
 package com.ibn.codegenerator.service;
 
-import com.ibn.codegenerator.anno.Generator;
 import com.ibn.codegenerator.exception.IbnException;
 
 import java.sql.SQLException;
-import java.util.Map;
 
 /**
  * @version 1.0
@@ -14,13 +12,12 @@ import java.util.Map;
  * @author： RenBin
  * @createTime：2020/4/24 15:56
  */
-@Generator
 public interface GeneratorService {
     /**
      * @description: 生成代码
      * @author：RenBin
      * @createTime：2020/7/21 15:57
      */
-    void generate() throws SQLException, IbnException;
+    void generate() throws SQLException, IbnException, NoSuchMethodException;
 }
 

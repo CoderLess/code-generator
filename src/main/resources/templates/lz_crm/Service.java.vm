@@ -13,8 +13,7 @@ import java.util.List;
  * @author： ${author}
  * @createTime：${curTime}
  */
-public interface ${table.entityName}Service
-{
+public interface ${table.entityName}Service {
     long create${table.entityName}(${table.entityName}DTO ${table.entityNameLow}DTO);
 
     long createBatch${table.entityName}(List<${table.entityName}DTO> ${table.entityNameLow}DTOList);

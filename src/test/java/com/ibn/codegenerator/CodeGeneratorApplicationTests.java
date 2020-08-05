@@ -133,7 +133,7 @@ class CodeGeneratorApplicationTests {
      * @createTime：2020/4/25 20:12
      */
     @Test
-    void createCode() throws IbnException, SQLException {
+    void createCode() throws IbnException, SQLException, NoSuchMethodException {
         generatorService.generate();
     }
 }

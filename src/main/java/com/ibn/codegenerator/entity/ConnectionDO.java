@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  * @version 1.0
- * @description:
+ * @description: 数据库连接配置
  * @projectName：code-generator
  * @see: com.ibn.codegenerator.entity
  * @author： RenBin

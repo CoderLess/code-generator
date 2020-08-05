@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  * @version 1.0
- * @description:
+ * @description: 根据VelocityTemplate生成文件
  * @projectName：code-generator
  * @see: com.ibn.codegenerator.service.impl
  * @author： RenBin
