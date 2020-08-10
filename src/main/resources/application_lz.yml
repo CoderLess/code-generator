@@ -1,0 +1,84 @@
+# 数据库连接配置
+databaseinfo:
+  driverClass: com.mysql.cj.jdbc.Driver
+  connectionURL: jdbc:mysql://192.168.202.100:3306/lz_finance?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+  userId: oilchem
+  password: mysteel
+sysconfig:
+  basepackage: com.mysteel.oilchem.crm
+  # 根据哪些表生成代码
+  generatetable:
+    - lz_crm.user_login_record
+#    - lz_finance.contract_line
+#    - lz_finance.contract_line_product
+#    - lz_finance.contract_line_user
+#    - lz_finance.contract_base
+
+velocityconfig:
+  # velocity模板路径
+  basepath: /templates/lz_crm
+  # 哪些模板需要生成
+  template:
+    service:
+      # 模板名称
+      name: Service.java.vm
+      # 项目名称
+      module: crm-domain
+      # 基础包名下的子包名
+      outPutPackage: service
+    serviceImpl:
+      name: ServiceImpl.java.vm
+      module: crm
+      outPutPackage: service.impl
+    mapper:
+      name: Dao.xml.vm
+      module: crm
+      type: mapper
+      outPutPackage: mybatis
+    dao:
+      name: Dao.java.vm
+      module: crm
+      outPutPackage: dao
+    do:
+      name: DO.java.vm
+      module: crm-domain
+      outPutPackage: entity
+    dto:
+      name: DTO.java.vm
+      module: crm-domain
+      outPutPackage: domain
+    vo:
+      name: VO.java.vm
+      module: crm-mgt
+      outPutPackage: vo
+    abstractController:
+      name: AbstractController.java.vm
+      module: crm-mgt
+      outPutPackage: controller
+    controller:
+      name: Controller.java.vm
+      module: crm-mgt
+      outPutPackage: controller.impl
+    abstractAO:
+      name: AbstractAO.java.vm
+      module: crm-mgt
+      outPutPackage: ao
+    ao:
+      name: AO.java.vm
+      module: crm-mgt
+      outPutPackage: ao.impl
+    test:
+      name: ServiceImplTest.java.vm
+      module: crm
+      type: test
+      outPutPackage: "java/#{sysconfig.basepackage}.service.impl"
+userconfig:
+  # 用户自定义配置
+  configMap:
+    author: RenBin
+    curTime: 2020/8/5 13:45
+    daoName: com.mysteel.oilchem.crm.dao.#{table.entityName}Dao
+    doName: com.mysteel.oilchem.crm.entity.#{table.entityName}DO
+    dtoName: com.mysteel.oilchem.crm.domain.#{table.entityName}DTO
+
+

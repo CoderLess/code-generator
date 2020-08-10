@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="${sysConfig.basepackage}.${velocityConfig.template.dao.outPutPackage}.${table.entityName}Dao">
+
+    <sql id="baseColumn">
+		#foreach($fileld in ${table.fieldDOList})
+            #if($foreach.hasNext)
+                `$fileld.fieldName`,
+            #else
+                `$fileld.fieldName`
+            #end
+        #end
+	</sql>
+
+    <sql id="${table.entityName}DO_Columns">
+        <trim suffixOverrides=",">
+            #foreach($fileld in ${table.fieldDOList})
+                <if test="$fileld.parameterName != null">`$fileld.fieldName`,</if>
+            #end
+        </trim>
+    </sql>
+
+    <sql id="${table.entityName}DO_Values">
+        <trim suffixOverrides=",">
+            #foreach($fileld in ${table.fieldDOList})
+                <if test="$fileld.parameterName != null">#{$fileld.parameterName},</if>
+            #end
+        </trim>
+    </sql>
+
+    <sql id="queryColumn">
+        <where>
+            <trim suffixOverrides=",">
+            #foreach($fileld in ${table.fieldDOList})
+                <if test="$fileld.parameterName != null"> and `$fileld.fieldName` = #{$fileld.parameterName}</if>
+            #end
+            </trim>
+        </where>
+    </sql>
+
+    <insert id="save" parameterType="${sysConfig.basepackage}.${velocityConfig.template.do.outPutPackage}.${table.entityName}DO" useGeneratedKeys="true" keyProperty="id">
+        insert into ${table.tableName} (<include refid="${table.entityName}DO_Columns"/>)
+        values(<include refid="${table.entityName}DO_Values"/>)
+    </insert>
+
+    <insert id="saveBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        insert into ${table.tableName}(
+        #foreach($fileld in ${table.fieldDOList})
+            #if($foreach.hasNext)
+                #if($fileld.fieldName != "id")
+            `$fileld.fieldName`,
+                #end
+            #else
+                #if($fileld.fieldName != "id")
+            `$fileld.fieldName`)
+                #end
+            #end
+        #end
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+            #foreach($fileld in ${table.fieldDOList})
+                #if($foreach.hasNext)
+                    #if($fileld.fieldName != "id")
+                #{item.$fileld.parameterName},
+                    #end
+                #else
+                    #if($fileld.fieldName != "id")
+                #{item.$fileld.parameterName})
+                    #end
+                #end
+            #end
+        </foreach>
+    </insert>
+
+    <update id="modify" parameterType="${sysConfig.basepackage}.${velocityConfig.template.do.outPutPackage}.${table.entityName}DO">
+        update ${table.tableName}
+        <set>
+            #foreach($fileld in ${table.fieldDOList})
+                <if test="$fileld.parameterName != null">`$fileld.fieldName` = #{$fileld.parameterName},</if>
+            #end
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from ${table.tableName} where id = #{value}
+	</delete>
+
+    <delete id="removeBatch">
+        delete from ${table.tableName} where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="query" resultType="${sysConfig.basepackage}.${velocityConfig.template.do.outPutPackage}.${table.entityName}DO">
+        select <include refid="baseColumn" /> from ${table.tableName} where id = #{value}
+    </select>
+
+    <select id="queryList" parameterType="${sysConfig.basepackage}.${velocityConfig.template.do.outPutPackage}.${table.entityName}DO" resultType="${sysConfig.basepackage}.${velocityConfig.template.do.outPutPackage}.${table.entityName}DO" >
+        select <include refid="baseColumn" /> from ${table.tableName}
+        <include refid="queryColumn" />
+    </select>
+
+    <select id="queryPage" parameterType="${sysConfig.basepackage}.${velocityConfig.template.do.outPutPackage}.${table.entityName}DO" resultType="${sysConfig.basepackage}.${velocityConfig.template.do.outPutPackage}.${table.entityName}DO" >
+        select <include refid="baseColumn" /> from ${table.tableName}
+        <include refid="queryColumn" />
+    </select>
+</mapper>

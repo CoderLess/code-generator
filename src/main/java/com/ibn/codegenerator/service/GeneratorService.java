@@ -18,6 +18,6 @@ public interface GeneratorService {
      * @author：RenBin
      * @createTime：2020/7/21 15:57
      */
-    void generate() throws SQLException, IbnException, NoSuchMethodException;
+    void generate() throws Exception;
 }
 

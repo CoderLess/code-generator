@@ -1,0 +1,67 @@
+package ${sysConfig.basepackage}.${velocityConfig.template.service.outPutPackage};
+
+/**
+ * @version 1.0
+ * @description: ${table.remark}
+ * @projectName：${projectName}
+ * @see: ${sysConfig.basepackage}.${velocityConfig.template.service.outPutPackage}
+ * @author： ${author}
+ * @createTime：${curTime}
+ */
+public interface ${table.entityName}Service{
+    /**
+     * @description: 添加信息
+     * @author：${author}
+     * @createTime：${curTime}
+     */
+    long save(${table.entityName}DTO ${table.entityNameLow}DTO) throws IbnException;
+
+    /**
+     * @description: 批量添加
+     * @author：${author}
+     * @createTime：${curTime}
+     */
+    long saveBatch(List<${table.entityName}DTO> ${table.entityNameLow}DTO) throws IbnException;
+
+    /**
+     * @description: 根据ID删除
+     * @author：${author}
+     * @createTime：${curTime}
+     */
+    int remove(Long id) throws IbnException;
+
+    /**
+     * @description: 根据ID批量删除
+     * @author：${author}
+     * @createTime：${curTime}
+     */
+    int removeBatch(Set<Long> idSet) throws IbnException;
+
+    /**
+     * @description: 根据ID更新
+     * @author：${author}
+     * @createTime：${curTime}
+     */
+    int modify(${table.entityName}DTO ${table.entityNameLow}DTO) throws IbnException;
+
+    /**
+     * @description: 根据条件查询
+     * @author：${author}
+     * @createTime：${curTime}
+     */
+    ${table.entityName}DTO query(Long id) throws IbnException;
+
+    /**
+     * @description: 查询多个
+     * @author：${author}
+     * @createTime：${curTime}
+     */
+    List<${table.entityName}DTO> queryList(${table.entityName}DTO ${table.entityNameLow}DTO) throws IbnException;
+
+    /**
+     * @description: 分页查询
+     * @author：${author}
+     * @createTime：${curTime}
+     */
+    Page<${table.entityName}DTO> queryPage(${table.entityName}DTO ${table.entityNameLow}DTO, PageInfo pageInfo) throws IbnException;
+}

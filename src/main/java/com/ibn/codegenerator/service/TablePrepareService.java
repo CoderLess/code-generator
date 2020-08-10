@@ -22,5 +22,5 @@ public interface TablePrepareService {
      * @createTime：2020/7/22 8:09
      * @return
      */
-    List<TableDO> prepareTable() throws SQLException, IbnException;
+    List<TableDO> prepareTable() throws Exception;
 }

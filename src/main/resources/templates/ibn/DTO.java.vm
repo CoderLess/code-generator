@@ -1,0 +1,26 @@
+package ${sysConfig.basepackage}.${velocityConfig.template.dto.outPutPackage};
+
+import lombok.Data;
+
+/**
+ * @version 1.0
+ * @description: ${table.remark}
+ * @projectName：${projectName}
+ * @see: ${sysConfig.basepackage}.${velocityConfig.template.dto.outPutPackage}
+ * @author： ${author}
+ * @createTime：${curTime}
+ */
+@Data
+public class ${table.entityName}DTO extends BaseDTO {
+
+	private static final long serialVersionUID = 1L;
+
+    #foreach($fileld in ${table.fieldDOList})
+    /**
+     * @description: $fileld.remark
+     * @author：${author}
+     * @createTime：${curTime}
+     */
+    private $fileld.attributeType $fileld.parameterName;
+    #end
+}

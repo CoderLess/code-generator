@@ -11,7 +11,6 @@ import com.ibn.codegenerator.util.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -40,7 +39,9 @@ public class GeneratorServiceImpl implements GeneratorService {
     private SysConfigDO sysConfigDO;
 
     @Override
-    public void generate() throws SQLException, IbnException, NoSuchMethodException {
+    public void generate() throws Exception {
+        userConfigDO.getConfigMap().put("sysConfig", sysConfigDO);
+        userConfigDO.getConfigMap().put("velocityConfig", velocityConfigDO);
         UserConfigDO srcUserConfigDO = (UserConfigDO) BeanUtils.cloneObjBySerialization(userConfigDO);
         VelocityConfigDO srcVelocityConfigDO = (VelocityConfigDO) BeanUtils.cloneObjBySerialization(velocityConfigDO);
         // 获取表表信息
@@ -90,9 +91,8 @@ public class GeneratorServiceImpl implements GeneratorService {
                     velocityTemplateDO.getOutPutPackage(),
                     tableDO.getEntityName(), suffix);
         } else  if (FileTypeEnum.TEST.getValue().equals(velocityTemplateDO.getType())) {
-            outputPath = String.format("%s/src/main/test/java/%s/%s/%s%s",
+            outputPath = String.format("%s/src/test/java/%s/%s%s",
                     velocityTemplateDO.getModule(),
-                    sysConfigDO.getBasepackage().replace(".", "/"),
                     velocityTemplateDO.getOutPutPackage(),
                     tableDO.getEntityName(), suffix);
         }else {

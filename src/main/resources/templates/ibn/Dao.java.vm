@@ -1,0 +1,14 @@
+package ${sysConfig.basepackage}.${velocityConfig.template.dao.outPutPackage};
+
+import ${sysConfig.basepackage}.${velocityConfig.template.do.outPutPackage}.${table.entityName}DO;
+
+/**
+ * @version 1.0
+ * @description: ${table.remark}
+ * @projectName：${projectName}
+ * @see: ${sysConfig.basepackage}.${velocityConfig.template.dao.outPutPackage}
+ * @author： ${author}
+ * @createTime：${curTime}
+ */
+public interface ${table.entityName}Dao extends BaseDao<${table.entityName}DO> {
+}

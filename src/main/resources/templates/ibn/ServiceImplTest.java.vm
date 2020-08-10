@@ -1,0 +1,123 @@
+package ${sysConfig.basepackage}.${velocityConfig.template.serviceImpl.outPutPackage};
+
+import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
+import com.google.common.collect.Lists;
+import ${sysConfig.basepackage}.${velocityConfig.template.dto.outPutPackage}.${table.entityName}DTO;
+import com.ibn.rms.page.PageInfo;
+import ${sysConfig.basepackage}.${velocityConfig.template.service.outPutPackage}.${table.entityName}Service;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class ${table.entityName}ServiceImplTest {
+
+    @Autowired
+    private ${table.entityName}Service ${table.entityNameLow}Service;
+
+    @Test
+    public void save() throws Exception{
+        ${table.entityName}DTO ${table.entityNameLow}DTO = new ${table.entityName}DTO();
+        #foreach($fileld in ${table.fieldDOList})
+            #if($fileld.fieldName != "id")
+                #if($fileld.attributeType == "String")
+        ${table.entityNameLow}DTO.set$fileld.attributeName ("$fileld.attributeName");
+                #elseif($fileld.attributeType == "Long")
+        ${table.entityNameLow}DTO.set$fileld.attributeName (0L);
+                #elseif($fileld.attributeType == "Integer")
+        ${table.entityNameLow}DTO.set$fileld.attributeName (1);
+                #end
+            #end
+        #end
+        ${table.entityNameLow}Service.save(${table.entityNameLow}DTO);
+    }
+
+    @Test
+    public void saveBatch() throws Exception{
+        ${table.entityName}DTO ${table.entityNameLow}DTO;
+        List<${table.entityName}DTO> ${table.entityNameLow}DTOList = Lists.newArrayList();
+        for (int i = 0; i < 10; i++) {
+            ${table.entityNameLow}DTO= new ${table.entityName}DTO();
+            #foreach($fileld in ${table.fieldDOList})
+                #if($fileld.fieldName != "id")
+                    #if($fileld.attributeType == "String")
+            ${table.entityNameLow}DTO.set$fileld.attributeName ("$fileld.attributeName"+i);
+                    #elseif($fileld.attributeType == "Long")
+            ${table.entityNameLow}DTO.set$fileld.attributeName (0L);
+                    #elseif($fileld.attributeType == "Integer")
+            ${table.entityNameLow}DTO.set$fileld.attributeName (1);
+                    #elseif($fileld.attributeType == "BigDecimal")
+            ${table.entityNameLow}DTO.set$fileld.attributeName (new BigDecimal("1.00"));
+                    #end
+                #end
+            #end
+            ${table.entityNameLow}DTOList.add(${table.entityNameLow}DTO);
+        }
+
+        ${table.entityNameLow}Service.saveBatch(${table.entityNameLow}DTOList);
+    }
+
+    @Test
+    public void modify() throws Exception{
+        ${table.entityName}DTO ${table.entityNameLow}DTO = new ${table.entityName}DTO();
+        #foreach($fileld in ${table.fieldDOList})
+            #if($fileld.fieldName != "id")
+                #if($fileld.attributeType == "String")
+        ${table.entityNameLow}DTO.set$fileld.attributeName ("modify");
+                #elseif($fileld.attributeType == "Long")
+        ${table.entityNameLow}DTO.set$fileld.attributeName (2L);
+                #elseif($fileld.attributeType == "Integer")
+        ${table.entityNameLow}DTO.set$fileld.attributeName (3);
+                #elseif($fileld.attributeType == "BigDecimal")
+        ${table.entityNameLow}DTO.set$fileld.attributeName (new BigDecimal("3.00"));
+                #end
+            #end
+        #end
+
+        ${table.entityNameLow}DTO.setId (10L);
+        ${table.entityNameLow}Service.modify(${table.entityNameLow}DTO);
+    }
+
+    @Test
+    public void remove()throws Exception {
+        ${table.entityNameLow}Service.remove(1L);
+    }
+
+    @Test
+    public void removeBatch() throws Exception{
+        Set<Long> idset = Sets.newHashSet();
+        for (Long i = 2L; i < 6L; i++) {
+            idset.add(i);
+        }
+        ${table.entityNameLow}Service.removeBatch(idset);
+    }
+
+    @Test
+    public void query() throws Exception{
+        ${table.entityName}DTO ${table.entityNameLow}DTO = ${table.entityNameLow}Service.query(6L);
+        System.out.println(JSONObject.toJSONString(${table.entityNameLow}DTO));
+    }
+
+    @Test
+    public void queryPage() throws Exception{
+        ${table.entityName}DTO ${table.entityNameLow}DTO = new ${table.entityName}DTO();
+        PageInfo pageInfo = new PageInfo();
+        pageInfo.setPageNum(1);
+        pageInfo.setPageSize(5);
+        Page<${table.entityName}DTO> ${table.entityNameLow}DTOPagination = ${table.entityNameLow}Service.queryPage(${table.entityNameLow}DTO, pageInfo);
+        System.out.println(JSONObject.toJSONString(${table.entityNameLow}DTOPagination));
+    }
+
+    @Test
+    public void queryList() throws Exception{
+        ${table.entityName}DTO ${table.entityNameLow}DTO = new ${table.entityName}DTO();
+        List<${table.entityName}DTO> ${table.entityNameLow}DTOList = ${table.entityNameLow}Service.queryList(${table.entityNameLow}DTO);
+        System.out.println(JSONObject.toJSONString(${table.entityNameLow}DTOList));
+    }
+}
