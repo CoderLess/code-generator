@@ -1,5 +1,12 @@
 package ${sysConfig.basepackage}.${velocityConfig.template.service.outPutPackage};
 
+import com.ibn.page.PageInfo;
+import com.ibn.page.Pagination;
+import ${sysConfig.basepackage}.${velocityConfig.template.dto.outPutPackage}.UserBaseDTO;
+import ${sysConfig.basepackage}.exception.IbnException;
+
+import java.util.List;
+import java.util.Set;
 /**
  * @version 1.0
  * @description: ${table.remark}
@@ -21,7 +28,7 @@ public interface ${table.entityName}Service{
      * @author：${author}
      * @createTime：${curTime}
      */
-    long saveBatch(List<${table.entityName}DTO> ${table.entityNameLow}DTO) throws IbnException;
+    long saveBatch(List<${table.entityName}DTO> ${table.entityNameLow}DTOList) throws IbnException;
 
     /**
      * @description: 根据ID删除
@@ -63,5 +70,5 @@ public interface ${table.entityName}Service{
      * @author：${author}
      * @createTime：${curTime}
      */
-    Page<${table.entityName}DTO> queryPage(${table.entityName}DTO ${table.entityNameLow}DTO, PageInfo pageInfo) throws IbnException;
+    Pagination<${table.entityName}DTO> queryPage(${table.entityName}DTO ${table.entityNameLow}DTO, PageInfo pageInfo) throws IbnException;
 }

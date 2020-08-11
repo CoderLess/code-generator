@@ -3,6 +3,8 @@ package ${sysConfig.basepackage}.${velocityConfig.template.serviceImpl.outPutPac
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Lists;
+import com.ibn.page.PageInfo;
+import com.ibn.page.Pagination;
 import ${sysConfig.basepackage}.${velocityConfig.template.dao.outPutPackage}.${table.entityName}Dao;
 import ${sysConfig.basepackage}.${velocityConfig.template.dto.outPutPackage}.${table.entityName}DTO;
 import ${sysConfig.basepackage}.${velocityConfig.template.do.outPutPackage}.${table.entityName}DO;
@@ -39,7 +41,8 @@ public class ${table.entityName}ServiceImpl implements ${table.entityName}Servic
         }
         ${table.entityName}DO ${table.entityNameLow}DO = new ${table.entityName}DO();
         BeanUtils.copyProperties(${table.entityNameLow}DTO, ${table.entityNameLow}DO);
-        return ${table.entityNameLow}Dao.save(${table.entityNameLow}DO);
+        ${table.entityNameLow}Dao.save(${table.entityNameLow}DO);
+        return ${table.entityNameLow}DTO.getId();
     }
 
     @Override
@@ -115,7 +118,7 @@ public class ${table.entityName}ServiceImpl implements ${table.entityName}Servic
     }
 
     @Override
-    public Page<${table.entityName}DTO> queryPage(${table.entityName}DTO ${table.entityNameLow}DTO, PageInfo pageInfo) throws IbnException {
+    public Pagination<${table.entityName}DTO> queryPage(${table.entityName}DTO ${table.entityNameLow}DTO, PageInfo pageInfo) throws IbnException {
         if (null == pageInfo || null == ${table.entityNameLow}DTO) {
             throw new IbnException(ExceptionEnum.NUll_PARAM);
         }
@@ -124,15 +127,17 @@ public class ${table.entityName}ServiceImpl implements ${table.entityName}Servic
         BeanUtils.copyProperties(${table.entityNameLow}DTO, ${table.entityNameLow}DO);
         Page<${table.entityName}DO> ${table.entityNameLow}DOPage = ${table.entityNameLow}Dao.queryPage(${table.entityNameLow}DO);
         if (CollectionUtils.isEmpty(${table.entityNameLow}DOPage)) {
-            return new Page<>();
+            return new Pagination<>(0,0,0,0);
         }
-        Page<${table.entityName}DTO> ${table.entityNameLow}DTOPage = new Page<>(${table.entityNameLow}DOPage.getPageNum(),${table.entityNameLow}DOPage.getPageSize());
-        ${table.entityNameLow}DTOPage.setTotal(${table.entityNameLow}DTOPage.getTotal());
-        ${table.entityNameLow}DOPage.stream().forEach(cur${table.entityName}DO -> {
+        Pagination<${table.entityName}DTO> ${table.entityNameLow}DTOPagination = new Pagination<>(${table.entityNameLow}DOPage.getPageNum(),
+                ${table.entityNameLow}DOPage.getPageSize(),${table.entityNameLow}DOPage.getTotal(),${table.entityNameLow}DOPage.getPages());
+
+        List<${table.entityName}DTO> ${table.entityNameLow}DTOList = ${table.entityNameLow}DOPage.stream().map(cur${table.entityName}DO -> {
             ${table.entityName}DTO cur${table.entityName}DTO = new ${table.entityName}DTO();
             BeanUtils.copyProperties(cur${table.entityName}DO, cur${table.entityName}DTO);
-            ${table.entityNameLow}DTOPage.add(cur${table.entityName}DTO);
-        });
-        return ${table.entityNameLow}DTOPage;
+            return cur${table.entityName}DTO;
+        }).collect(Collectors.toList());
+        ${table.entityNameLow}DTOPagination.setList(${table.entityNameLow}DTOList);
+        return ${table.entityNameLow}DTOPagination;
     }
 }
