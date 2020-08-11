@@ -1,7 +1,7 @@
 # 数据库连接配置
 databaseinfo:
   driverClass: com.mysql.cj.jdbc.Driver
-  connectionURL: jdbc:mysql://192.167.12.238:3306/ibn_rms?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+  connectionURL: jdbc:mysql://192.168.0.238:3306/ibn_rms?useUnicode=true&characterEncoding=UTF-8&useSSL=false
   userId: root
   password: 123456
 sysconfig:
@@ -48,31 +48,27 @@ velocityconfig:
       name: DTO.java.vm
       module: crm-domain
       outPutPackage: domain
-#    vo:
-#      name: VO.java.vm
-#      module: crm-mgt
-#      outPutPackage: vo
-#    abstractController:
-#      name: AbstractController.java.vm
-#      module: crm-mgt
-#      outPutPackage: controller
-#    controller:
-#      name: Controller.java.vm
-#      module: crm-mgt
-#      outPutPackage: controller.impl
-#    abstractAO:
-#      name: AbstractAO.java.vm
-#      module: crm-mgt
-#      outPutPackage: ao
-#    ao:
-#      name: AO.java.vm
-#      module: crm-mgt
-#      outPutPackage: ao.impl
+    vo:
+      name: VO.java.vm
+      module: crm-mgt
+      outPutPackage: vo
+    ao:
+      name: AO.java.vm
+      module: crm-mgt
+      outPutPackage: ao
+    aoImpl:
+      name: AOImpl.java.vm
+      module: crm-mgt
+      outPutPackage: ao.impl
+    controller:
+      name: Controller.java.vm
+      module: crm-mgt
+      outPutPackage: controller
 userconfig:
   # 用户自定义配置
   configMap:
     author: RenBin
-    curTime: 2020/8/5 13:45
+    curTime: 2020/8/11 21:45
     projectName: ibn-rms
 
 

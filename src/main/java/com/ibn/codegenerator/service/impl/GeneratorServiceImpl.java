@@ -85,22 +85,31 @@ public class GeneratorServiceImpl implements GeneratorService {
      */
     private String createOutPath(TableDO tableDO, String suffix, VelocityTemplateDO velocityTemplateDO) {
         String outputPath;
+        // 模块名
+        String module = velocityTemplateDO.getModule();
+        // 输出的包
+        String outPutPackage = velocityTemplateDO.getOutPutPackage().replace(".","/");
+        // 实例名
+        String entityName = tableDO.getEntityName();
+        // 基础包
+        String basePackage = sysConfigDO.getBasepackage().replace(".", "/");
+
         if (FileTypeEnum.MAPPER.getValue().equals(velocityTemplateDO.getType())) {
-            outputPath = String.format("%s/src/main/java/resources/%s/%s%s",
-                    velocityTemplateDO.getModule(),
-                    velocityTemplateDO.getOutPutPackage(),
-                    tableDO.getEntityName(), suffix);
+            outputPath = String.format("%s/src/main/resources/%s/%s%s",
+                    module,
+                    outPutPackage,
+                    entityName, suffix);
         } else  if (FileTypeEnum.TEST.getValue().equals(velocityTemplateDO.getType())) {
             outputPath = String.format("%s/src/test/java/%s/%s%s",
-                    velocityTemplateDO.getModule(),
-                    velocityTemplateDO.getOutPutPackage(),
-                    tableDO.getEntityName(), suffix);
+                    module,
+                    outPutPackage,
+                    entityName, suffix);
         }else {
             outputPath = String.format("%s/src/main/java/%s/%s/%s%s",
-                    velocityTemplateDO.getModule(),
-                    sysConfigDO.getBasepackage().replace(".", "/"),
-                    velocityTemplateDO.getOutPutPackage(),
-                    tableDO.getEntityName(), suffix);
+                    module,
+                    basePackage,
+                    outPutPackage,
+                    entityName, suffix);
         }
 
         return outputPath;

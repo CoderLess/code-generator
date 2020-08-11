@@ -8,9 +8,6 @@ import com.ibn.page.Pagination;
 import ${sysConfig.basepackage}.${velocityConfig.template.dao.outPutPackage}.${table.entityName}Dao;
 import ${sysConfig.basepackage}.${velocityConfig.template.dto.outPutPackage}.${table.entityName}DTO;
 import ${sysConfig.basepackage}.${velocityConfig.template.do.outPutPackage}.${table.entityName}DO;
-import ${sysConfig.basepackage}.enumer.ExceptionEnum;
-import ${sysConfig.basepackage}.exception.IbnException;
-import ${sysConfig.basepackage}.page.PageInfo;
 import ${sysConfig.basepackage}.${velocityConfig.template.service.outPutPackage}.${table.entityName}Service;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +20,11 @@ import java.util.stream.Collectors;
 
 /**
  * @version 1.0
- * @description:
- * @projectName：ibn-rms
- * @see: com.ibn.rms.service.impl
- * @author： RenBin
- * @createTime：2020/8/10 10:01
+ * @description: ${table.remark} service实现
+ * @projectName：${projectName}
+ * @see: ${sysConfig.basepackage}.${velocityConfig.template.serviceImpl.outPutPackage}
+ * @author： ${author}
+ * @createTime：${curTime}
  */
 @Service("${table.entityNameLow}Service")
 public class ${table.entityName}ServiceImpl implements ${table.entityName}Service {
@@ -35,21 +32,15 @@ public class ${table.entityName}ServiceImpl implements ${table.entityName}Servic
     private ${table.entityName}Dao ${table.entityNameLow}Dao;
 
     @Override
-    public long save(${table.entityName}DTO ${table.entityNameLow}DTO) throws IbnException {
-        if (null == ${table.entityNameLow}DTO) {
-            throw new IbnException(ExceptionEnum.NUll_PARAM);
-        }
+    public long save(${table.entityName}DTO ${table.entityNameLow}DTO) {
         ${table.entityName}DO ${table.entityNameLow}DO = new ${table.entityName}DO();
         BeanUtils.copyProperties(${table.entityNameLow}DTO, ${table.entityNameLow}DO);
         ${table.entityNameLow}Dao.save(${table.entityNameLow}DO);
-        return ${table.entityNameLow}DTO.getId();
+        return ${table.entityNameLow}DO.getId();
     }
 
     @Override
-    public long saveBatch(List<${table.entityName}DTO> ${table.entityNameLow}DTOList) throws IbnException {
-        if (CollectionUtils.isEmpty(${table.entityNameLow}DTOList)) {
-            throw new IbnException(ExceptionEnum.NUll_PARAM);
-        }
+    public long saveBatch(List<${table.entityName}DTO> ${table.entityNameLow}DTOList) {
         List<${table.entityName}DO> ${table.entityNameLow}DOList = ${table.entityNameLow}DTOList.stream().map(${table.entityNameLow}DTO -> {
             ${table.entityName}DO ${table.entityNameLow}DO = new ${table.entityName}DO();
             BeanUtils.copyProperties(${table.entityNameLow}DTO, ${table.entityNameLow}DO);
@@ -59,36 +50,24 @@ public class ${table.entityName}ServiceImpl implements ${table.entityName}Servic
     }
 
     @Override
-    public int remove(Long id) throws IbnException {
-        if (null == id) {
-            throw new IbnException(ExceptionEnum.NUll_PARAM);
-        }
+    public int remove(Long id) {
         return ${table.entityNameLow}Dao.remove(id);
     }
 
     @Override
-    public int removeBatch(Set<Long> idSet) throws IbnException {
-        if (CollectionUtils.isEmpty(idSet)) {
-            throw new IbnException(ExceptionEnum.NUll_PARAM);
-        }
+    public int removeBatch(Set<Long> idSet) {
         return ${table.entityNameLow}Dao.removeBatch(idSet);
     }
 
     @Override
-    public int modify(${table.entityName}DTO ${table.entityNameLow}DTO) throws IbnException {
-        if (null == ${table.entityNameLow}DTO || null == ${table.entityNameLow}DTO.getId()) {
-            throw new IbnException(ExceptionEnum.NUll_PARAM);
-        }
+    public int modify(${table.entityName}DTO ${table.entityNameLow}DTO) {
         ${table.entityName}DO ${table.entityNameLow}DO = new ${table.entityName}DO();
         BeanUtils.copyProperties(${table.entityNameLow}DTO, ${table.entityNameLow}DO);
         return ${table.entityNameLow}Dao.modify(${table.entityNameLow}DO);
     }
 
     @Override
-    public ${table.entityName}DTO query(Long id) throws IbnException {
-        if (null == id) {
-            throw new IbnException(ExceptionEnum.NUll_PARAM);
-        }
+    public ${table.entityName}DTO query(Long id) {
         ${table.entityName}DO ${table.entityNameLow}ResultDO = ${table.entityNameLow}Dao.query(id);
         if (null == ${table.entityNameLow}ResultDO) {
             return null;
@@ -99,10 +78,7 @@ public class ${table.entityName}ServiceImpl implements ${table.entityName}Servic
     }
 
     @Override
-    public List<${table.entityName}DTO> queryList(${table.entityName}DTO ${table.entityNameLow}DTO) throws IbnException {
-        if (null == ${table.entityNameLow}DTO) {
-            throw new IbnException(ExceptionEnum.NUll_PARAM);
-        }
+    public List<${table.entityName}DTO> queryList(${table.entityName}DTO ${table.entityNameLow}DTO) {
         ${table.entityName}DO ${table.entityNameLow}DO = new ${table.entityName}DO();
         BeanUtils.copyProperties(${table.entityNameLow}DTO, ${table.entityNameLow}DO);
         List<${table.entityName}DO> ${table.entityNameLow}DOList = ${table.entityNameLow}Dao.queryList(${table.entityNameLow}DO);
@@ -118,10 +94,7 @@ public class ${table.entityName}ServiceImpl implements ${table.entityName}Servic
     }
 
     @Override
-    public Pagination<${table.entityName}DTO> queryPage(${table.entityName}DTO ${table.entityNameLow}DTO, PageInfo pageInfo) throws IbnException {
-        if (null == pageInfo || null == ${table.entityNameLow}DTO) {
-            throw new IbnException(ExceptionEnum.NUll_PARAM);
-        }
+    public Pagination<${table.entityName}DTO> queryPage(${table.entityName}DTO ${table.entityNameLow}DTO, PageInfo pageInfo) {
         PageHelper.startPage(pageInfo.getPageNum(), pageInfo.getPageSize());
         ${table.entityName}DO ${table.entityNameLow}DO = new ${table.entityName}DO();
         BeanUtils.copyProperties(${table.entityNameLow}DTO, ${table.entityNameLow}DO);

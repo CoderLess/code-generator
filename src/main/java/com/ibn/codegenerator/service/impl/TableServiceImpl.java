@@ -88,7 +88,7 @@ public class TableServiceImpl implements TableService {
                 throw new SQLException("应该获取到1张表，实际没有获取到表");
             }
             if (tables.size()>1) {
-                throw new SQLException(String.format("应该获取到1张表，实际没有获取到%d表",tables.size()));
+                throw new SQLException(String.format("应该获取到1张表，实际获取到%d表",tables.size()));
             }
             IntrospectedTable introspectedTable = tables.get(0);
             // 获取表注释

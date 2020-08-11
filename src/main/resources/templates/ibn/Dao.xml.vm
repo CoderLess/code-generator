@@ -90,7 +90,7 @@
 
     <delete id="removeBatch">
         delete from ${table.tableName} where id in
-        <foreach item="id" collection="array" open="(" separator="," close=")">
+        <foreach item="id" collection="collection" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>

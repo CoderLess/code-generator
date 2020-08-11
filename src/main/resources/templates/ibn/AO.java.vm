@@ -1,0 +1,74 @@
+package ${sysConfig.basepackage}.${velocityConfig.template.ao.outPutPackage};
+
+import com.ibn.page.PageInfo;
+import com.ibn.page.Pagination;
+import com.ibn.rms.vo.${table.entityName}VO;
+
+import java.util.List;
+import java.util.Set;
+
+/**
+ * @version 1.0
+ * @description: ${table.remark} ao层
+ * @projectName：${projectName}
+ * @see: ${sysConfig.basepackage}.${velocityConfig.template.ao.outPutPackage}
+ * @author： ${author}
+ * @createTime：${curTime}
+ */
+public interface ${table.entityName}AO {
+    /**
+     * @description: 添加信息
+     * @author：RenBin
+     * @createTime：2020/8/10 9:31
+     */
+    long save(${table.entityName}VO ${table.entityNameLow}VO);
+
+    /**
+     * @description: 批量添加
+     * @author：RenBin
+     * @createTime：2020/8/10 9:31
+     */
+    long saveBatch(List<${table.entityName}VO> ${table.entityNameLow}VOList);
+
+    /**
+     * @description: 根据ID删除
+     * @author：RenBin
+     * @createTime：2020/8/10 9:32
+     */
+    int remove(Long id);
+
+    /**
+     * @description: 根据ID批量删除
+     * @author：RenBin
+     * @createTime：2020/8/10 9:32
+     */
+    int removeBatch(Set<Long> idSet);
+
+    /**
+     * @description: 根据ID更新
+     * @author：RenBin
+     * @createTime：2020/8/10 9:33
+     */
+    int modify(${table.entityName}VO ${table.entityNameLow}VO);
+
+    /**
+     * @description: 根据条件查询
+     * @author：RenBin
+     * @createTime：2020/8/10 9:35
+     */
+    ${table.entityName}VO query(Long id);
+
+    /**
+     * @description: 查询多个
+     * @author：RenBin
+     * @createTime：2020/8/10 9:36
+     */
+    List<${table.entityName}VO> queryList(${table.entityName}VO ${table.entityNameLow}VO);
+
+    /**
+     * @description: 分页查询
+     * @author：RenBin
+     * @createTime：2020/8/10 9:37
+     */
+    Pagination<${table.entityName}VO> queryPage(${table.entityName}VO ${table.entityNameLow}VO, PageInfo pageInfo);
+}

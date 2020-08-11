@@ -1,0 +1,108 @@
+package ${sysConfig.basepackage}.${velocityConfig.template.aoImpl.outPutPackage};
+
+import com.ibn.page.PageInfo;
+import com.ibn.page.Pagination;
+import com.ibn.rms.ao.${table.entityName}AO;
+import com.ibn.rms.domain.${table.entityName}DTO;
+import com.ibn.rms.service.${table.entityName}Service;
+import com.ibn.rms.vo.${table.entityName}VO;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+/**
+ * @version 1.0
+ * @description: ${table.remark} ao实现
+ * @projectName：${projectName}
+ * @see: ${sysConfig.basepackage}.${velocityConfig.template.aoImpl.outPutPackage}
+ * @author： ${author}
+ * @createTime：${curTime}
+ */
+@Service("${table.entityNameLow}AO")
+public class ${table.entityName}AOImpl implements ${table.entityName}AO {
+    @Autowired
+    private ${table.entityName}Service ${table.entityNameLow}Service;
+
+    @Override
+    public long save(${table.entityName}VO ${table.entityNameLow}VO) {
+        ${table.entityName}DTO ${table.entityNameLow}DTO = new ${table.entityName}DTO();
+        BeanUtils.copyProperties(${table.entityNameLow}VO, ${table.entityNameLow}DTO);
+        return ${table.entityNameLow}Service.save(${table.entityNameLow}DTO);
+    }
+
+    @Override
+    public long saveBatch(List<${table.entityName}VO> ${table.entityNameLow}VOList) {
+        List<${table.entityName}DTO> ${table.entityNameLow}DTOList = ${table.entityNameLow}VOList.stream().map(${table.entityNameLow}VO -> {
+            ${table.entityName}DTO ${table.entityNameLow}DTO = new ${table.entityName}DTO();
+            BeanUtils.copyProperties(${table.entityNameLow}VO, ${table.entityNameLow}DTO);
+            return ${table.entityNameLow}DTO;
+        }).collect(Collectors.toList());
+        return ${table.entityNameLow}Service.saveBatch(${table.entityNameLow}DTOList);
+    }
+
+    @Override
+    public int remove(Long id) {
+        return ${table.entityNameLow}Service.remove(id);
+    }
+
+    @Override
+    public int removeBatch(Set<Long> idSet) {
+        return ${table.entityNameLow}Service.removeBatch(idSet);
+    }
+
+    @Override
+    public int modify(${table.entityName}VO ${table.entityNameLow}VO) {
+        ${table.entityName}DTO ${table.entityNameLow}DTO = new ${table.entityName}DTO();
+        BeanUtils.copyProperties(${table.entityNameLow}VO, ${table.entityNameLow}DTO);
+        return ${table.entityNameLow}Service.modify(${table.entityNameLow}DTO);
+    }
+
+    @Override
+    public ${table.entityName}VO query(Long id) {
+        ${table.entityName}DTO ${table.entityNameLow}DTO = ${table.entityNameLow}Service.query(id);
+        if (null == ${table.entityNameLow}DTO) {
+            return null;
+        }
+        ${table.entityName}VO ${table.entityNameLow}VO = new ${table.entityName}VO();
+        BeanUtils.copyProperties(${table.entityNameLow}DTO, ${table.entityNameLow}VO);
+        return ${table.entityNameLow}VO;
+    }
+
+    @Override
+    public List<${table.entityName}VO> queryList(${table.entityName}VO ${table.entityNameLow}VO) {
+        ${table.entityName}DTO ${table.entityNameLow}DTO = new ${table.entityName}DTO();
+        BeanUtils.copyProperties(${table.entityNameLow}VO, ${table.entityNameLow}DTO);
+        List<${table.entityName}DTO> ${table.entityNameLow}DTOList = ${table.entityNameLow}Service.queryList(${table.entityNameLow}DTO);
+        List<${table.entityName}VO> ${table.entityNameLow}VOList = ${table.entityNameLow}DTOList.stream().map(cur${table.entityName}DTO -> {
+            ${table.entityName}VO cur${table.entityName}VO = new ${table.entityName}VO();
+            BeanUtils.copyProperties(cur${table.entityName}DTO, cur${table.entityName}VO);
+            return cur${table.entityName}VO;
+        }).collect(Collectors.toList());
+        return ${table.entityNameLow}VOList;
+    }
+
+    @Override
+    public Pagination<${table.entityName}VO> queryPage(${table.entityName}VO ${table.entityNameLow}VO, PageInfo pageInfo) {
+        ${table.entityName}DTO ${table.entityNameLow}DTO = new ${table.entityName}DTO();
+        BeanUtils.copyProperties(${table.entityNameLow}VO, ${table.entityNameLow}DTO);
+        Pagination<${table.entityName}DTO> ${table.entityNameLow}DTOPagination = ${table.entityNameLow}Service.queryPage(${table.entityNameLow}DTO,pageInfo);
+        if (null != ${table.entityNameLow}DTOPagination && CollectionUtils.isEmpty(${table.entityNameLow}DTOPagination.getList())) {
+            return new Pagination<>(0,0,0,0);
+        }
+        Pagination<${table.entityName}VO> ${table.entityNameLow}VOPagination = new Pagination<>(${table.entityNameLow}DTOPagination.getPageNum(),
+                ${table.entityNameLow}DTOPagination.getPageSize(),${table.entityNameLow}DTOPagination.getTotal(),${table.entityNameLow}DTOPagination.getPages());
+
+        List<${table.entityName}VO> ${table.entityNameLow}VOList = ${table.entityNameLow}DTOPagination.getList().stream().map(cur${table.entityName}DTO -> {
+            ${table.entityName}VO cur${table.entityName}VO = new ${table.entityName}VO();
+            BeanUtils.copyProperties(cur${table.entityName}DTO, cur${table.entityName}VO);
+            return cur${table.entityName}VO;
+        }).collect(Collectors.toList());
+        ${table.entityNameLow}VOPagination.setList(${table.entityNameLow}VOList);
+        return ${table.entityNameLow}VOPagination;
+    }
+}

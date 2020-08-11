@@ -4,7 +4,7 @@ import ${sysConfig.basepackage}.${velocityConfig.template.do.outPutPackage}.${ta
 
 /**
  * @version 1.0
- * @description: ${table.remark}
+ * @description: ${table.remark} dao层
  * @projectName：${projectName}
  * @see: ${sysConfig.basepackage}.${velocityConfig.template.dao.outPutPackage}
  * @author： ${author}

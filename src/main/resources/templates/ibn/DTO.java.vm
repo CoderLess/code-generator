@@ -1,10 +1,11 @@
 package ${sysConfig.basepackage}.${velocityConfig.template.dto.outPutPackage};
 
+import com.ibn.domain.BaseDTO;
 import lombok.Data;
 
 /**
  * @version 1.0
- * @description: ${table.remark}
+ * @description: ${table.remark} dto
  * @projectName：${projectName}
  * @see: ${sysConfig.basepackage}.${velocityConfig.template.dto.outPutPackage}
  * @author： ${author}

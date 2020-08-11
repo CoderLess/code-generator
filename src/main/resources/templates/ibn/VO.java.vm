@@ -1,0 +1,26 @@
+package ${sysConfig.basepackage}.vo;
+
+import com.ibn.vo.BaseVO;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
+/**
+ * @version 1.0
+ * @description: ${table.remark} vo
+ * @projectName：${projectName}
+ * @see: ${sysConfig.basepackage}.${velocityConfig.template.vo.outPutPackage}
+ * @author： ${author}
+ * @createTime：${curTime}
+ */
+@Data
+@ApiModel(description="${table.remark} vo")
+public class ${table.entityName}VO extends BaseVO {
+
+	private static final long serialVersionUID = 1L;
+
+    #foreach($fileld in ${table.fieldDOList})
+    @ApiModelProperty(value="$fileld.remark")
+    private $fileld.attributeType $fileld.parameterName;
+    #end
+}

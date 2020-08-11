@@ -1,12 +1,13 @@
 package ${sysConfig.basepackage}.${velocityConfig.template.do.outPutPackage};
 
+import com.ibn.entity.BaseDO;
 import lombok.Data;
 
 /**
  * @version 1.0
- * @description: ${table.remark}
+ * @description: ${table.remark} do
  * @projectName：${projectName}
- * @see: ${sysConfig.basepackage}.entity
+ * @see: ${sysConfig.basepackage}.${velocityConfig.template.do.outPutPackage}
  * @author： ${author}
  * @createTime：${curTime}
  */
